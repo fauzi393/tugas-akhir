@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Kasir Eksekutif RM Gacor Jaya Enterprise Edition v3.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        body {
+            background-color: #f4f6f9;
+            color: #2d3748;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        .main-header-navigation {
+            background: linear-gradient(135deg, #6b0000 0%, #990000 50%, #b30000 100%);
+            color: #ffffff;
+            padding: 0 40px;
+            height: 80px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+            border-bottom: 4px solid #ecc94b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-brand-container {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .header-logo-icon {
+            background-color: #ffffff;
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+.header-logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+        .header-title-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .header-title-text h1 {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+        .header-title-text h1 span {
+            color: #ecc94b;
+        }
+        .header-title-text p {
+            font-size: 11px;
+            color: #f7fafc;
+            opacity: 0.85;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+        .header-status-badge {
+            background-color: #48bb78;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
+        }
+        .header-menu-links {
+            display: flex;
+            list-style: none;
+            gap: 12px;
+            align-items: center;
+        }
+        .header-menu-item a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.2s ease-in-out;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .header-menu-item.active a {
+            background-color: #ecc94b;
+            color: #6b0000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .header-menu-item:not(.active) a:hover {
+            background-color: rgba(255, 255, 255, 0.12);
+            color: #ecc94b;
+        }
+        .hero-jumbotron-showcase {
+            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url('home.jpg') center/cover no-repeat;
+            padding: 60px 40px;
+            text-align: center;
+            color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.2);
+        }
+        .hero-jumbotron-showcase h2 {
+            font-size: 38px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+            letter-spacing: 1px;
+        }
+        .hero-jumbotron-showcase p {
+            font-size: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+            color: #e2e8f0;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        .pos-engine-layout-grid {
+            max-width: 1760px;
+            width: 100%;
+            margin: 30px auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 1fr 440px;
+            gap: 30px;
+            flex-grow: 1;
+        }
+        .menu-catalog-container-block {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+        .section-category-header {
+            background: #ffffff;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 800;
+            color: #1a202c;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border-left: 6px solid #b30000;
+            margin-bottom: 20px;
+        }
+        .section-category-header .category-indicator-pill {
+            background-color: #fff5f5;
+            color: #b30000;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid #feb2b2;
+        }
+        .catalog-responsive-flex-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .card-item-node {
+            background-color: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .card-item-node:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+            border-color: #feb2b2;
+        }
+        .card-item-thumbnail {
+            width: 100%;
+            height: 170px;
+            background-color: #edf2f7;
+            overflow: hidden;
+            position: relative;
+        }
+        .card-item-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-item-node:hover .card-item-thumbnail img {
+            transform: scale(1.06);
+        }
+        .card-item-badge-code {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background-color: rgba(26, 32, 44, 0.85);
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(4px);
+        }
+        .card-item-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .card-item-body h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a202c;
+            line-height: 1.3;
+            min-height: 42px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .card-item-body p {
+            font-size: 12px;
+            color: #718096;
+            line-height: 1.5;
+            height: 54px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        .card-item-footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid #f7fafc;
+        }
+        .card-item-footer-row .price-tag {
+            font-size: 18px;
+            font-weight: 800;
+            color: #b30000;
+        }
+        .card-item-footer-row button {
+            background-color: #2f855a;
+            color: #ffffff;
+            border: none;
+            padding: 9px 15px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 6px rgba(47,133,90,0.2);
+        }
+        .card-item-footer-row button:hover {
+            background-color: #22543d;
+        }
+        .sidebar-panel-container {
+            background-color: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            height: calc(100vh - 140px);
+            position: sticky;
+            top: 110px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .sidebar-panel-container h3 {
+            font-size: 18px;
+            font-weight: 800;
+            color: #1a202c;
+            border-bottom: 2px solid #edf2f7;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .sidebar-panel-container h3 span {
+            background-color: #edf2f7;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 6px;
+            color: #4a5568;
+        }
+        .cart-items-viewport-list {
+            list-style: none;
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .cart-row-node {
+            background-color: #f7fafc;
+            border-radius: 10px;
+            padding: 12px;
+            border: 1px solid #edf2f7;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: background-color 0.15s ease;
+        }
+        .cart-row-node:hover {
+            background-color: #edf2f7;
+        }
+        .cart-row-header-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .cart-row-item-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #2d3748;
+            line-height: 1.3;
+        }
+        .cart-row-item-price-calc {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1a202c;
+            white-space: nowrap;
+        }
+        .cart-row-controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-row-action-buttons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-cart-modifier {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e0;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 12px;
+            color: #4a5568;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+        }
+        .btn-cart-modifier:hover {
+            background-color: #fff5f5;
+            color: #b30000;
+            border-color: #feb2b2;
+        }
+        .cart-live-quantity-text {
+            font-size: 13px;
+            font-weight: 700;
+            color: #2d3748;
+            min-width: 24px;
+            text-align: center;
+        }
+        .btn-cart-trash-remove {
+            background: none;
+            border: none;
+            color: #e53e3e;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+        .btn-cart-trash-remove:hover {
+            background-color: #fff5f5;
+        }
+        .btn-cart-trash-remove svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+        .logistics-delivery-selector, .payment-channel-selector {
+            background-color: #f7fafc;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #edf2f7;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .logistics-delivery-selector h5, .payment-channel-selector h5 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #718096;
+            font-weight: 700;
+        }
+        .input-select-dropdown {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e0;
+            font-size: 12px;
+            font-weight: 600;
+            outline: none;
+            background-color: #ffffff;
+            color: #2d3748;
+        }
+        .input-select-dropdown:focus {
+            border-color: #feb2b2;
+            box-shadow: 0 0 0 3px rgba(241,144,144,0.2);
+        }
+        .radio-payment-flex-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .radio-custom-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #2d3748;
+            cursor: pointer;
+            background-color: #ffffff;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            transition: all 0.15s ease;
+        }
+        .radio-custom-label:hover {
+            border-color: #feb2b2;
+            background-color: #fff5f5;
+        }
+        .radio-custom-label input {
+            accent-color: #b30000;
+        }
+        .financial-summary-ledger-card {
+            border-top: 2px dashed #e2e8f0;
+            padding-top: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .ledger-row-data {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #718096;
+            font-weight: 500;
+        }
+        .ledger-row-data.grand-total-highlight {
+            font-size: 22px;
+            font-weight: 900;
+            color: #1a202c;
+            border-top: 1px solid #edf2f7;
+            padding-top: 10px;
+            margin-top: 4px;
+        }
+        .ledger-row-data.grand-total-highlight span:last-child {
+            color: #b30000;
+        }
+        .btn-dispatch-checkout-order {
+            background: linear-gradient(135deg, #cc0000 0%, #b30000 50%, #800000 100%);
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: 800;
+            border-radius: 10px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(179,0,0,0.25);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-dispatch-checkout-order:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(179,0,0,0.35);
+        }
+        .btn-dispatch-checkout-order:active {
+            transform: translateY(1px);
+        }
+        .overlay-modal-purgatory {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(26, 32, 44, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease-in-out;
+            backdrop-filter: blur(4px);
+        }
+        .overlay-modal-purgatory.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-surface-container {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 480px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            border: 1px solid #e2e8f0;
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .overlay-modal-purgatory.active .modal-surface-container {
+            transform: scale(1);
+        }
+        .modal-surface-container h4 {
+            color: #b30000;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .qris-matrix-render-wrapper {
+            display: none;
+            background-color: #f7fafc;
+            padding: 20px;
+            border: 2px dashed #cbd5e0;
+            border-radius: 12px;
+            margin: 15px 0;
+        }
+        .qris-matrix-render-wrapper img {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 12px auto;
+            display: block;
+            border: 4px solid #1a202c;
+            border-radius: 8px;
+        }
+        .cod-notification-alert-wrapper {
+            display: none;
+            background-color: #fffaf0;
+            padding: 16px;
+            border: 1px solid #feebc8;
+            border-radius: 12px;
+            margin: 15px 0;
+            color: #dd6b20;
+            font-weight: 600;
+            font-size: 13px;
+            line-height: 1.5;
+            text-align: left;
+        }
+        .modal-live-charge-bill-box {
+            font-size: 28px;
+            font-weight: 900;
+            color: #22543d;
+            background-color: #f0fff4;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 1px solid #c6f6d5;
+            letter-spacing: 0.5px;
+        }
+        .modal-action-buttons-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 20px;
+        }
+        .btn-modal-action-confirm {
+            background-color: #2f855a;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.15s ease;
+        }
+        .btn-modal-action-confirm:hover {
+            background-color: #22543d;
+        }
+        .btn-modal-action-dismiss {
+            background-color: #e53e3e;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.15s ease;
+        }
+        .btn-modal-action-dismiss:hover {
+            background-color: #9b2c2c;
+        }
+        footer {
+            background-color: #1a202c;
+            color: #a0aec0;
+            text-align: center;
+            padding: 24px;
+            margin-top: auto;
+            font-size: 12px;
+            border-top: 4px solid #b30000;
+            font-weight: 500;
+        }
+        @media (max-width: 1200px) {
+            .pos-engine-layout-grid {
+                grid-template-columns: 1fr;
+            }
+            .sidebar-panel-container {
+                position: static;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header-navigation">
+        <div class="header-brand-container">
+            <div class="header-logo-icon">
+            <img src="logo.png" alt="Logo RM Gacor Jaya">
+        </div>
+            <div class="header-title-text">
+                <h1>RM <span>King Zawata</span></h1>
+                <p>Sistem Point-Of-Sales Terpusat &bull; Terminal Rumah Makan Minang Modern</p>
+            </div>
+        </div>
+        <div class="header-status-badge">Engine Core Online</div>
+        <ul class="header-menu-links">
+            <li class="header-menu-item active"><a href="#">Kasir Utama</a></li>
+            <li class="header-menu-item"><a href="#">Stok Dapur</a></li>
+            <li class="header-menu-item"><a href="#">Laporan Finansial</a></li>
+        </ul>
+    </header>
+
+    <div class="hero-jumbotron-showcase">
+        <h2>Sistem Otomasi Kasir &amp; Inventory</h2>
+        <p>Aplikasi monitoring transaksi lauk padang otentik berskala enterprise dengan pembatasan modul karbohidrat murni eksklusif pada variasi pilihan menu nasi, kentang, dan mie saja.</p>
+    </div>
+
+    <div class="pos-engine-layout-grid">
+        
+        <div class="menu-catalog-container-block">
+            
+            <div>
+                <div class="section-category-header">
+                    <span>🍖 Kategori Lauk Padang Otentik</span>
+                    <span class="category-indicator-pill" id="badge-total-lauk">0 Variasi</span>
+                </div>
+                <div class="catalog-responsive-flex-grid" id="container-target-lauk"></div>
+            </div>
+
+            <div>
+                <div class="section-category-header">
+                    <span>🍚 Kategori Karbohidrat Murni (Nasi, Kentang, Mie Only)</span>
+                    <span class="category-indicator-pill" id="badge-total-karbo">0 Variasi</span>
+                </div>
+                <div class="catalog-responsive-flex-grid" id="container-target-karbo"></div>
+            </div>
+
+            <div>
+                <div class="section-category-header">
+                    <span>🥤 Kategori Minuman &amp; Seduhan Tradisional</span>
+                    <span class="category-indicator-pill" id="badge-total-minum">0 Variasi</span>
+                </div>
+                <div class="catalog-responsive-flex-grid" id="container-target-minum"></div>
+            </div>
+
+        </div>
+
+        <div class="sidebar-panel-container">
+            <h3>Daftar Belanja Nota <span id="dom-live-badge-item-count">0 Item</span></h3>
+            
+            <ul class="cart-items-viewport-list" id="dom-target-cart-rows">
+                <p style="color: #a0aec0; font-size: 12px; text-align: center; padding: 40px 0; font-weight: 500;">Keranjang belanja kasir kosong.</p>
+            </ul>
+
+            <!-- MODUL BARU: OPSI LAYANAN DINAMIS -->
+            <div class="payment-channel-selector">
+                <h5>Tipe Layanan Makan</h5>
+                <div class="radio-payment-flex-group">
+                    <label class="radio-custom-label">
+                        <input type="radio" name="tipeLayananRadio" value="DINE_IN" checked onchange="toggleFiturLogistikLayanan()">
+                        🍽️ Makan di Tempat (Dine In)
+                    </label>
+                    <label class="radio-custom-label">
+                        <input type="radio" name="tipeLayananRadio" value="ONLINE" onchange="toggleFiturLogistikLayanan()">
+                        🚗 Pesanan Online / Delivery
+                    </label>
+                </div>
+            </div>
+            
+            <div class="logistics-delivery-selector" id="wrapper-kurir-logistik" style="display: none;">
+                <h5>Zona Kurir Pengantaran Resto</h5>
+                <select class="input-select-dropdown" id="dom-shipping-dropdown" onchange="sinkronisasiHitunganDanTampilanFinansial()">
+                    <option value="6000">Zona Internal Komplex (0-2 Km) - Rp 6.000</option>
+                    <option value="12000">Zona Reguler Perkotaan (2-5 Km) - Rp 12.000</option>
+                    <option value="22000">Zona Sub-Urban Luar Sektor (5-10 Km) - Rp 22.000</option>
+                </select>
+            </div>
+
+            <div class="payment-channel-selector">
+                <h5>Metode Penyelesaian Dana</h5>
+                <div class="radio-payment-flex-group">
+                    <label class="radio-custom-label">
+                        <input type="radio" name="paymentMethodRadio" value="QRIS" checked>
+                        📱 QRIS Dynamic Gateway Auto-Check
+                    </label>
+                    <label class="radio-custom-label">
+                        <input type="radio" name="paymentMethodRadio" value="COD">
+                        💵 Bayar Tunai di Tempat (COD)
+                    </label>
+                </div>
+            </div>
+
+            <div class="financial-summary-ledger-card">
+                <div class="ledger-row-data">
+                    <span>Subtotal Item:</span>
+                    <span id="dom-val-subtotal">Rp 0</span>
+                </div>
+                <div class="ledger-row-data">
+                    <span>Biaya Logistik:</span>
+                    <span id="dom-val-shipping">Rp 0</span>
+                </div>
+                <div class="ledger-row-data grand-total-highlight">
+                    <span>Total Tagihan:</span>
+                    <span id="dom-val-grandtotal">Rp 0</span>
+                </div>
+            </div>
+            
+            <button class="btn-dispatch-checkout-order" onclick="eksekusiProsesValidasiModal()">
+                <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24">
+                    <path d="M17 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm1.75-2.24l.03-.12c.03-.1.1-.17.2-.17h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.74 4 16.5 4 17.34c0 1.1.9 2 2 2h14v-2H6.42c-.14 0-.25-.11-.25-.25l.02-.1 1.56-2.25z"/>
+                </svg>
+                Proses Nota &amp; Validasi
+            </button>
+        </div>
+
+    </div>
+
+    <div class="overlay-modal-purgatory" id="dom-modal-wrapper-node">
+        <div class="modal-surface-container">
+            <h4 id="dom-modal-title-text">Otorisasi Finansial</h4>
+            <p id="dom-modal-desc-text" style="font-size: 12px; color: #718096; margin-bottom: 12px;"></p>
+            
+            <div class="qris-matrix-render-wrapper" id="dom-modal-qris-box">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=RM_GACOR_JAYA_CORE_GATEWAY_PRODUCTION_2026" alt="QRIS Core Vector">
+                <p style="font-size: 10px; color: #e53e3e; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Kode QR Dinamis Berlaku Selama 3 Menit Kedepan</p>
+            </div>
+
+            <div class="cod-notification-alert-wrapper" id="dom-modal-cod-box">
+                Sistem COD diaktifkan. Pesanan Anda akan langsung dipacking oleh tim internal dapur RM Gacor Jaya dan dikirim via kurir kemitraan. Harap siapkan lembaran uang tunai pas untuk diserahkan kepada kurir setibanya di titik lokasi pengantaran.
+            </div>
+            
+            <p style="font-size: 12px; margin-top: 10px; font-weight: 700; color: #4a5568; text-transform: uppercase; letter-spacing: 0.5px;">Nominal Yang Harus Dibayar:</p>
+            <div class="modal-live-charge-bill-box" id="dom-modal-total-display">Rp 0</div>
+            
+            <div class="modal-action-buttons-stack">
+                <button class="btn-modal-action-confirm" id="dom-modal-confirm-trigger" onclick="eksekusiFinalisasiMutasiKasir()">Verifikasi Pembayaran Sukses</button>
+                <button class="btn-modal-action-dismiss" onclick="tutupProsesModalKasir()">Batalkan Transaksi</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 PT Gacor Jaya Pangan Persada Tbk. Seluruh Sistem POS Dilindungi Enkripsi Core Ledger Terpusat.</p>
+    </footer>
+
+    <script>
+        const DATABASE_LAUK_PADANG = [
+    { 
+        id: "LK-001",
+        nama: "Rendang Sapi Minang Asli",
+        harga: 25000,
+        img: "rendang.jpg",
+        desc: "Daging sapi pilihan bertekstur empuk yang dimasak lambat dengan parutan kelapa gongseng harum hingga menghitam pekat khas Payakumbuh."
+    },
+    { 
+        id: "LK-002",
+        nama: "Ayam Pop Gurih Sambal Petir",
+        harga: 22000,
+        img: "ayam pop.jpg",
+        desc: "Ayam kampung tanpa kulit direbus kuah air kelapa dan asam kandis, digoreng kilat di minyak panas, disajikan lengkap dengan sambal tomat basah."
+    },
+    { 
+        id: "LK-003",
+        nama: "Gulai Tunjang Kikil Sapi Kental",
+        harga: 26000,
+        img: "gulai-kikil-sapi.jpg",
+        desc: "Potongan kikil kaki sapi tebal dengan tekstur kenyal empuk sempurna, terendam dalam siraman kuah gulai rempah kapau kuning kemerahan."
+    },
+    { 
+        id: "LK-004",
+        nama: "Dendeng Batokok Cabe Ijo Ulek",
+        harga: 24000,
+        img: "dendeng-batokok.jpg",
+        desc: "Daging sapi khas dalam diiris tipis, direbus rempah, dibakar bumbu, dipukul rata hingga pipih lembut lalu diguyur minyak kelapa cabai hijau."
+    },
+    { 
+        id: "LK-005",
+        nama: "Dendeng Lambok Balado Merah",
+        harga: 24000,
+        img: "dendeng-lambok.jpg",
+        desc: "Dendeng basah yang digoreng setengah kering, mempertahankan kelembutan serat daging juicy dikombinasikan balutan sambal balado merah pedas gurih."
+    },
+    { 
+        id: "LK-006",
+        nama: "Ayam Bakar Rempah Kelapa Bumbu Kuning",
+        harga: 21000,
+        img: "ayam-bakar.jpg",
+        desc: "Ayam potong tebal diungkep sari kunyit lengkuas lalu dipanggang di atas bara api tempurung kelapa asli hingga memunculkan aroma smokey tajam."
+    },
+    { 
+        id: "LK-007",
+        nama: "Gulai Kepala Ikan Kakap Merah Masif",
+        harga: 48000,
+        img: "gulai-kakap.jpg",
+        desc: "Setengah belahan kepala ikan kakap merah segar laut dalam porsi jumbo, dimasak dengan adonan santan murni dan daun ruku-ruku anti amis."
+    },
+    { 
+        id: "LK-008",
+        nama: "Paru Sapi Goreng Krispi Renyah",
+        harga: 20000,
+        img: "paru-goreng.jpg",
+        desc: "Paru sapi yang diiris tipis simetris, direbus ketumbar bawang putih, lalu digoreng deep-fry hingga menghasilkan keripik paru super garing."
+    },
+    { 
+        id: "LK-009",
+        nama: "Gulai Ayam Kampung Kuah Kuning",
+        harga: 23000,
+        img: "gulai-ayam.jpg",
+        desc: "Potongan paha/dada ayam kampung padat berisi terendam kuah gulai encer kaya kunyit, serai, daun jeruk, dan kelapa parut murni."
+    },
+    { 
+        id: "LK-010",
+        nama: "Ayam Goreng Lengkuas Parut Garing",
+        harga: 20000,
+        img: "ayam-lengkuas.jpg",
+        desc: "Ayam goreng bumbu kuning tradisional yang disajikan dengan limpahan serundeng gurih hasil parutan rempah lengkuas goreng renyah."
+    },
+    { 
+        id: "LK-011",
+        nama: "Gulai Otak Sapi Lembut Sutra",
+        harga: 23000,
+        img: "gulai-otak.jpg",
+        desc: "Otak sapi segar dibersihkan dari lapisan membran darah, dikukus daun pisang lalu direbus kuah gulai gurih bertekstur selembut sutra."
+    },
+    { 
+        id: "LK-012",
+        nama: "Ikan Tongkol Asam Padeh Pedas Segar",
+        harga: 19000,
+        img: "asam-padeh.jpg",
+        desc: "Olahan ikan tongkol sirip biru segar dimasak kuah merah menyala bercita rasa asam pedas pekat tanpa santan memakai asam kandis."
+    },
+    { 
+        id: "LK-013",
+        nama: "Cumi Gulai Padang Isi Tahu Telur",
+        harga: 25000,
+        img: "cumi-gulai.jpg",
+        desc: "Cumi-cumi sero ukuran sedang yang bagian abdomennya diisi kocokan telur dadar tahu halus, dimasak dalam kuah gulai merah gurih."
+    },
+    { 
+        id: "LK-014",
+        nama: "Ikan Bawal Bakar Madu Bumbu Padang",
+        harga: 24000,
+        img: "bawal-bakar.jpg",
+        desc: "Ikan bawal air tawar segar dibelah dua, dimarinasi saus cabai kecap ketumbar, dibakar merata hingga kecokelatan gurih manis."
+    },
+    { 
+        id: "LK-015",
+        nama: "Belut Sawah Goreng Cabe Ijo",
+        harga: 21000,
+        img: "belut-goreng.jpg",
+        desc: "Belut sawah tangkapan liar dibersihkan melingkar, digoreng kering gurih garing disajikan dengan lumatan cabai ijo padang asli."
+    }
+        ];
+
+        const DATABASE_KARBOHIDRAT = [
+    { 
+        id: "KB-001",
+        nama: "Nasi Putih Cianjur Pulen Porsi Double",
+        harga: 10000,
+        img: "nasi-putih.jpg",
+        desc: "Nasi putih hangat berkualitas dari beras pilihan porsi melimpah."
+    },
+    { 
+        id: "KB-002",
+        nama: "Perkedel Kentang Tumbuk Bawang",
+        harga: 6000,
+        img: "perkedel.jpg",
+        desc: "Olahan kentang kukus lembut dicampur cincangan bawang merah dan seledri."
+    },
+    { 
+        id: "KB-003",
+        nama: "Mie Goreng Kampung Bumbu Padang",
+        harga: 8000,
+        img: "mie-goreng.png",
+        desc: "Mie kuning tebal khas ranah minang dengan cita rasa bumbu rempah berani."
+    }
+        ];
+
+        const DATABASE_MINUMAN = [
+    { 
+        id: "MN-001",
+        nama: "Teh Talua Bebek Gula Aren Kocok",
+        harga: 15000,
+        img: "teh-talua.jpg",
+        desc: "Minuman penambah stamina racikan teh pekat instan dengan kocokan telur bebek berbusa tebal."
+    },
+    { 
+        id: "MN-002",
+        nama: "Es Teh Manis Gula Cair Murni",
+        harga: 5000,
+        img: "es-teh.jpg",
+        desc: "Kesegaran seduhan teh hitam berkualitas dengan pemanis gula tebu asli."
+    },
+    { 
+        id: "MN-003",
+        nama: "Jus Alpukat Mentega Kerok Cokelat",
+        harga: 14000,
+        img: "jus-alpukat.jpg",
+        desc: "Blenderan buah alpukat mentega matang bertekstur kental dengan hiasan susu cokelat."
+    }
+        ];
+
+        let KERANJANG_KASIR = {};
+
+        // INJEKSI MAKANAN KE KATALOG DOM
+        function renderKatalogMenuResto() {
+            const populate = (data, targetId) => {
+                const container = document.getElementById(targetId);
+                container.innerHTML = "";
+                data.forEach(item => {
+                    container.innerHTML += `
+                        <div class="card-item-node">
+                            <div class="card-item-thumbnail">
+                                <span class="card-item-badge-code">${item.id}</span>
+                                <img src="${item.img}" alt="${item.nama}">
+                            </div>
+                            <div class="card-item-body">
+                                <h4>${item.nama}</h4>
+                                <p>${item.desc}</p>
+                                <div class="card-item-footer-row">
+                                    <span class="price-tag">Rp ${item.harga.toLocaleString('id-ID')}</span>
+                                    <button onclick="tambahItemKeKeranjang('${item.id}', '${item.nama}', ${item.harga})">➕ Tambah</button>
+                                </div>
+                            </div>
+                        </div>`;
+                });
+            };
+            populate(DATABASE_LAUK_PADANG, "container-target-lauk");
+            populate(DATABASE_KARBOHIDRAT, "container-target-karbo");
+            populate(DATABASE_MINUMAN, "container-target-minum");
+            
+            document.getElementById("badge-total-lauk").innerText = `${DATABASE_LAUK_PADANG.length} Variasi`;
+            document.getElementById("badge-total-karbo").innerText = `${DATABASE_KARBOHIDRAT.length} Variasi`;
+            document.getElementById("badge-total-minum").innerText = `${DATABASE_MINUMAN.length} Variasi`;
+        }
+
+        function tambahItemKeKeranjang(id, nama, harga) {
+            if(KERANJANG_KASIR[id]) {
+                KERANJANG_KASIR[id].qty++;
+            } else {
+                KERANJANG_KASIR[id] = { nama, harga, qty: 1 };
+            }
+            sinkronisasiHitunganDanTampilanFinansial();
+        }
+
+        function ubahKuantitasItem(id, delta) {
+            if(!KERANJANG_KASIR[id]) return;
+            KERANJANG_KASIR[id].qty += delta;
+            if(KERANJANG_KASIR[id].qty <= 0) {
+                delete KERANJANG_KASIR[id];
+            }
+            sinkronisasiHitunganDanTampilanFinansial();
+        }
+
+        function hapusItemSempurna(id) {
+            delete KERANJANG_KASIR[id];
+            sinkronisasiHitunganDanTampilanFinansial();
+        }
+
+        // FUNGSI BARU UNTUK KONTROL DINE IN VS ONLINE
+        function toggleFiturLogistikLayanan() {
+            const tipeLayanan = document.querySelector('input[name="tipeLayananRadio"]:checked').value;
+            const wrapperKurir = document.getElementById("wrapper-kurir-logistik");
+            
+            if (tipeLayanan === "ONLINE") {
+                wrapperKurir.style.display = "flex";
+            } else {
+                wrapperKurir.style.display = "none";
+            }
+            sinkronisasiHitunganDanTampilanFinansial();
+        }
+
+        // RE-KALKULASI AKUNTANSI NOTA KASIR
+        function sinkronisasiHitunganDanTampilanFinansial() {
+            const listContainer = document.getElementById("dom-target-cart-rows");
+            listContainer.innerHTML = "";
+            
+            let subtotal = 0;
+            let totalItemCount = 0;
+            const keys = Object.keys(KERANJANG_KASIR);
+
+            if(keys.length === 0) {
+                listContainer.innerHTML = `<p style="color: #a0aec0; font-size: 12px; text-align: center; padding: 40px 0; font-weight: 500;">Keranjang belanja kasir kosong.</p>`;
+            } else {
+                keys.forEach(id => {
+                    const item = KERANJANG_KASIR[id];
+                    const itemTotal = item.harga * item.qty;
+                    subtotal += itemTotal;
+                    totalItemCount += item.qty;
+
+                    listContainer.innerHTML += `
+                        <li class="cart-row-node">
+                            <div class="cart-row-header-meta">
+                                <span class="cart-row-item-title">${item.nama}</span>
+                                <span class="cart-row-item-price-calc">Rp ${itemTotal.toLocaleString('id-ID')}</span>
+                            </div>
+                            <div class="cart-row-controls-row">
+                                <div class="cart-row-action-buttons">
+                                    <button class="btn-cart-modifier" onclick="ubahKuantitasItem('${id}', -1)">-</button>
+                                    <span class="cart-live-quantity-text">${item.qty}</span>
+                                    <button class="btn-cart-modifier" onclick="ubahKuantitasItem('${id}', 1)">+</button>
+                                </div>
+                                <button class="btn-cart-trash-remove" onclick="hapusItemSempurna('${id}')">
+                                    <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                                </button>
+                            </div>
+                        </li>`;
+                });
+            }
+
+            // Aturan Ongkir Dinamis berdasarkan tipe layanan
+            const tipeLayanan = document.querySelector('input[name="tipeLayananRadio"]:checked').value;
+            let ongkir = 0;
+            if (tipeLayanan === "ONLINE") {
+                ongkir = parseInt(document.getElementById("dom-shipping-dropdown").value) || 0;
+            }
+            
+            let grandTotal = subtotal + ongkir;
+
+            document.getElementById("dom-live-badge-item-count").innerText = `${totalItemCount} Item`;
+            document.getElementById("dom-val-subtotal").innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
+            document.getElementById("dom-val-shipping").innerText = `Rp ${ongkir.toLocaleString('id-ID')}`;
+            document.getElementById("dom-val-grandtotal").innerText = `Rp ${grandTotal.toLocaleString('id-ID')}`;
+            document.getElementById("dom-modal-total-display").innerText = `Rp ${grandTotal.toLocaleString('id-ID')}`;
+        }
+
+        // INTERAKSI VALIDASI MODAL
+        function eksekusiProsesValidasiModal() {
+            if(Object.keys(KERANJANG_KASIR).length === 0) {
+                alert("Gagal melakukan otorisasi: Keranjang belanja kosong!");
+                return;
+            }
+
+            const paymentMethod = document.querySelector('input[name="paymentMethodRadio"]:checked').value;
+            const modal = document.getElementById("dom-modal-wrapper-node");
+            
+            document.getElementById("dom-modal-qris-box").style.display = "none";
+            document.getElementById("dom-modal-cod-box").style.display = "none";
+
+            if(paymentMethod === "QRIS") {
+                document.getElementById("dom-modal-title-text").innerText = "Otorisasi QRIS Dynamic Gateway";
+                document.getElementById("dom-modal-desc-text").innerText = "Silakan scan kode QRIS terenkripsi di bawah ini untuk merampungkan mutasi saldo.";
+                document.getElementById("dom-modal-qris-box").style.display = "block";
+            } else {
+                document.getElementById("dom-modal-title-text").innerText = "Validasi Sistem Cash-On-Delivery";
+                document.getElementById("dom-modal-desc-text").innerText = "Konfirmasi data invoice logistik pengiriman kurir internal.";
+                document.getElementById("dom-modal-cod-box").style.display = "block";
+            }
+
+            modal.classList.add("active");
+        }
+
+        function tutupProsesModalKasir() {
+            document.getElementById("dom-modal-wrapper-node").classList.remove("active");
+        }
+
+        function eksekusiFinalisasiMutasiKasir() {
+            alert("Transaksi Berhasil Didokumentasikan! Ledger Database Kasir Telah Diperbarui.");
+            KERANJANG_KASIR = {};
+            sinkronisasiHitunganDanTampilanFinansial();
+            tutupProsesModalKasir();
+        }
+
+        // Run On Initialized
+        window.onload = () => {
+            renderKatalogMenuResto();
+        };
+    </script>
+</body>
+</html>
